@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.round
 import kotlin.math.sqrt
 
 /**
@@ -164,7 +165,22 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var n2 = 0;
+    var d: Int;
+    var n = n;
+
+    while (n > 0) {
+        d = n % 10
+        n = round((n / 10).toDouble()).toInt()
+        n2 *= 10
+        n2 += d
+
+    }
+    return n2
+
+}
+
 
 /**
  * Средняя

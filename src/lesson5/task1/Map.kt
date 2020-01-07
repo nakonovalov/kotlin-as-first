@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import kotlin.math.roundToInt
+
 /**
  * Пример
  *
@@ -159,7 +161,34 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): MutableMap<String, Double> {
+
+    var new = mutableMapOf<String, Double>()
+    var new_c = mutableMapOf<String, Int>()
+    for (item in stockPrices) {
+        val stock_name = item.toList()[0]
+        val stock_price = item.toList()[1]
+        if (new.containsKey(stock_name.toString())) {
+            new.put(
+                stock_name.toString(),
+                (((new.getValue(stock_name.toString()).toDouble() + stock_price.toString().toDouble())))
+            )
+            new_c.put(stock_name.toString(),  (new_c.getValue(stock_name.toString()).toInt())+1)
+        } else {
+            new.put(stock_name.toString(), stock_price.toString().toDouble())
+            new_c.put(stock_name.toString(), 1)
+        }
+
+    }
+
+
+    for (item in new_c){
+        var stock_name = item.key
+        new.put(stock_name.toString(), (new.getValue(stock_name.toString()).toDouble()/new_c.getValue(stock_name.toString())) )
+    }
+    return new
+}
+
 
 /**
  * Средняя
@@ -176,7 +205,27 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var cheapest_brand = ""
+    var low_price = 0
+    for (item in stuff) {
+        if (item.value.toList()[0] == kind) {
+            if (((item.value.toList()[1]).toString().toDouble() < low_price) || low_price == 0) {
+                low_price = item.value.toList()[1].toString().toDouble().roundToInt()
+                cheapest_brand = item.key
+            }
+        }
+
+
+        if (low_price == 0){
+
+            return null
+        }
+    }
+            return cheapest_brand
+
+
+}
 
 /**
  * Средняя

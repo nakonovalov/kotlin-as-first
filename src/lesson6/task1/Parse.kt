@@ -2,6 +2,9 @@
 
 package lesson6.task1
 
+import java.lang.Exception
+
+
 /**
  * Пример
  *
@@ -133,7 +136,53 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    try {
+
+
+        var strs = expression.split(" ")
+        if (expression[0] == '+' || expression[0] == '-') {
+            throw IllegalArgumentException()
+        }
+        var res = strs[0].toInt()
+
+        var loop = 0
+        var act = ""
+        var check = 0
+
+
+        for (x in strs) {
+
+            if (loop > 0) {
+                if (check > 1) {
+                    throw IllegalArgumentException()
+                }
+                if (x == "+") {
+                    act = "+"
+                    check += 1
+                } else if (x == "-") {
+                    act = "-"
+                    check += 1
+                } else {
+                    check = 0
+                    if (x[0] == '-' || x[0] == '+') {
+                        throw IllegalArgumentException()
+                    }
+                    if (act == "-") {
+                        res -= x.toInt()
+                    } else {
+
+                        res += x.toInt()
+
+                    }
+                }
+            } else loop += 1
+        }
+        return res
+    }catch (e:Exception){
+        throw IllegalArgumentException()
+    }
+}
 
 /**
  * Сложная
